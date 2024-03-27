@@ -1,0 +1,15 @@
+.box {
+  display: flex;
+  width: 522px;
+  gap: 12px;
+  margin: 0 auto;
+
+}
+
+/*.line {
+  display: flex;
+  padding-top: 120px;
+  gap: 16px;
+  justify-content: center;
+  
+}*/

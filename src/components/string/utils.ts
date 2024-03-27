@@ -1,11 +1,7 @@
 import { DELAY_IN_MS } from "../../constants/delays";
 import { ElementStates } from "../../types/element-states";
+import { pause } from "../../utils/utils";
 import { TStringArrayElement } from "./type";
-
-
-const pause = (interval: number) => {
-  return new Promise(resolve => setTimeout(resolve, interval));
-}
 
 const swap = (array: Array<TStringArrayElement>, firstIndex: number, lastIndex: number) => {
   const temp = array[firstIndex];
