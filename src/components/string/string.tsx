@@ -19,20 +19,18 @@ export const StringComponent: FC = () => {
     setInputValue(event.target.value);
   };
 
-  const isEmptyString = inputValue.length === 0;
-
   const onClick = () => {
     setLoader(true);
-
     const sourceArray = inputValue.split(EMPTY_STRING).map((item) => {
       return { value: item,
                state: ElementStates.Default }
     });
     reverseArray(sourceArray, setCurrentArray);
-
     setInputValue(EMPTY_STRING);
     setLoader(false);
   }
+
+  const isEmptyString = inputValue.length === 0;
 
   return (
     <SolutionLayout title="Строка">

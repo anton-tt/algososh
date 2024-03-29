@@ -1,15 +1,26 @@
 .box {
   display: flex;
-  width: 522px;
-  gap: 12px;
+  width: 980px;
   margin: 0 auto;
-
+  align-items: baseline;
 }
 
-/*.line {
+.radio {
+  display: flex;
+  padding-right: 52px;
+  gap: 40px;
+}
+
+.buttons {
+  display: flex;
+  padding-right: 80px;
+  gap: 12px;
+}
+
+.line {
   display: flex;
   padding-top: 120px;
   gap: 16px;
   justify-content: center;
-  
-}*/
+  align-items: baseline;
+}

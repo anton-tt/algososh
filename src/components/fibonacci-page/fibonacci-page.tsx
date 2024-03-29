@@ -1,14 +1,13 @@
 import { FC, useState, ChangeEvent } from "react";
-import { MAX_NUMBER, EMPTY_STRING } from "../../constants/const";
 import { SolutionLayout } from "../ui/solution-layout/solution-layout";
 import { Input } from "../ui/input/input";
 import { Button } from "../ui/button/button";
 import { Circle } from "../ui/circle/circle";
-import getFibonacciNumbers from "./utils";
-import styles from "./fibonacci.module.css";
+import { MAX_NUMBER, EMPTY_STRING } from "../../constants/const";
 import { SHORT_DELAY_IN_MS } from "../../constants/delays";
 import { pause } from "../../utils/utils";
-
+import getFibonacciNumbers from "./utils";
+import styles from "./fibonacci.module.css";
 
 export const FibonacciPage: FC = () => {
 
