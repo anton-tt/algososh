@@ -1,18 +1,15 @@
 interface IQueue<T> {
-  getElements: () => (T | null)[];
+  getElements: () => (T | null | undefined)[];
   isEmpty: () => boolean;
   enqueue: (item: T) => void;
-    dequeue: () => void;
-    
+  dequeue: (size: number) => void; 
   clear: (size: number) => void;  
-  
-    getHead: () => T | null;
-    getTail: () => T | null;
-    
-  }
+  getHead: () => T | null | undefined;
+  getTail: () => T | null | undefined;  
+}
   
 export default class Queue<T> implements IQueue<T> {
-  private container: (T | null)[] = [];
+  private container: (T | null | undefined)[] = [];
   private head = 0;
   private tail = 0;
   private readonly size: number = 0;
@@ -23,7 +20,7 @@ export default class Queue<T> implements IQueue<T> {
     this.container = Array(size).fill(undefined);
   }
   
-  getElements = () => [...this.container];
+  getElements = () => [...this.container];;
 
   isEmpty = () => this.length === 0;
 
@@ -31,46 +28,42 @@ export default class Queue<T> implements IQueue<T> {
     if (this.length >= this.size) {
       throw new Error("Maximum length exceeded");
     }
-    this.container[this.tail % this.size] = item;
-    this.tail++; 
-    this.length++; 
+    if (this.isEmpty()) {
+      this.container[0] = item;
+      this.length++;
+    } else {
+      this.tail++;
+      this.container[this.tail] = item;
+      this.length++; 
+    }  
   };
   
-  dequeue = () => {
+  dequeue = (size: number) => {
     if (this.isEmpty()) {
       throw new Error("No elements in the queue");
     }
-    delete this.container[this.head];
-    this.head++;
+    this.container[this.head] = undefined;
     this.length--;
+    if (this.head < this.tail) {
+      this.head++;
+    } else {
+      this.clear(size);
+    }
   };
-  
-  
-  
-    clear = (size: number) => {
-      this.container = Array(size).fill(undefined);
-      this.head = 0;
-      this.tail = 0;
-      this.length = 0;
-    };   
+
+  clear = (size: number) => {
+    this.container = Array(size).fill(undefined);
+    this.head = 0;
+    this.tail = 0;
+    this.length = 0;
+  };   
     
-    
+  getHead = () => {  
+    return this.container[this.head];
+  };
 
-    getHead = () => {  
-      return this.container[this.head];
-    };
+  getTail = () => {
+    return this.container[this.tail];
+  };
 
-    getHeadIndex = () => { 
-      if (this.isEmpty()) {
-        throw new Error("No elements in the queue");
-      } 
-      return this.head;
-    };
-
-      getTail = () => {
-        return this.container[this.tail - 1];
-      };
-
-  
-
-}
+};

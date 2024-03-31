@@ -44,7 +44,6 @@ export const StackPage: FC = () => {
     setLoader(EMPTY_STRING);
   }
 
-
   const onClickClear = () => {
     setLoader(DELETE_ALL);
     stack.clear();
@@ -92,8 +91,8 @@ export const StackPage: FC = () => {
           disabled={!isEmptyString || isEmptyStack || addElementLoader || deleteElementLoader}
           onClick={onClickClear}
         />
-
       </div>
+
       <div className={styles.line}>
       { container.map((item, index) => {
         return <Circle 
@@ -106,11 +105,7 @@ export const StackPage: FC = () => {
         })
       }
       </div>
-
-
-
-
-
     </SolutionLayout>
   );
+
 };

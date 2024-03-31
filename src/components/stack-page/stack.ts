@@ -7,28 +7,28 @@ interface IStack<T> {
 }
   
 export default class Stack<T> implements IStack<T> {
-    private container: T[] = [];
+  private container: T[] = [];
   
-    push = (item: T): void => {
-      this.container.push(item);
-    };
+  push = (item: T): void => {
+    this.container.push(item);
+  };
   
-    pop = (): void => {
-      this.container.pop();
-    };
+  pop = (): void => {
+    this.container.pop();
+  };
   
-    peak = (): T | null => {
-      if (this.container.length > 0) {
-        return this.container[this.container.length - 1];
-      } else {
-        return null;
-      }  
-    };
+  peak = (): T | null => {
+    if (this.container.length > 0) {
+      return this.container[this.container.length - 1];
+    } else {
+      return null;
+    }  
+  };
   
-    getSize = () => this.container.length;
+  getSize = () => this.container.length;
 
-    getElements = () => [...this.container];
+  getElements = () => [...this.container];
 
-    clear = () => this.container.length && (this.container = []);
+  clear = () => this.container.length && (this.container = []);
 
-  }
+}
