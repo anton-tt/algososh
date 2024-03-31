@@ -4,12 +4,14 @@ import { Input } from "../ui/input/input";
 import { Button } from "../ui/button/button";
 import { Circle } from "../ui/circle/circle";
 import { ElementStates } from "../../types/element-states";
-import { MAX_STRING_LENGTH, EMPTY_STRING } from "../../constants/const";
+import { EMPTY_STRING } from "../../constants/delays";
 import { TStringArrayElement } from "./type";
 import reverseArray from "./utils";
 import styles from "./string.module.css";
 
 export const StringComponent: FC = () => {
+
+  const MAX_STRING_LENGTH = 11;
   
   const [inputValue, setInputValue] = useState(EMPTY_STRING);
   const [loader, setLoader] = useState(false);
@@ -39,6 +41,7 @@ export const StringComponent: FC = () => {
         <Input
           maxLength={ MAX_STRING_LENGTH }
           isLimitText={true}
+          value={inputValue}
           onChange={onChange}
         />
         <Button

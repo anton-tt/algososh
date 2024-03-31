@@ -46,40 +46,41 @@ export const SortingPage: FC = () => {
   return (
     <SolutionLayout title="Сортировка массива">
       <div className={styles.box}>
+        
         <div className={styles.radio}>
+          <RadioInput
+            label={RADIO_SELECT}
+            value={RADIO_SELECT}
+            onChange={onChangeRadio}
+            checked={radioValue === RADIO_SELECT}
+          />
 
-        <RadioInput
-          label={RADIO_SELECT}
-          value={RADIO_SELECT}
-          onChange={onChangeRadio}
-          checked={radioValue === RADIO_SELECT}
-        />
-
-        <RadioInput
-          label={RADIO_BUBBLE}
-          value={RADIO_BUBBLE}
-          onChange={onChangeRadio}
-          checked={radioValue === RADIO_BUBBLE}
-        />
+          <RadioInput
+            label={RADIO_BUBBLE}
+            value={RADIO_BUBBLE}
+            onChange={onChangeRadio}
+            checked={radioValue === RADIO_BUBBLE}
+          />
         </div>
 
         <div className={styles.buttons}>
-        <Button
-          text={"По возрастанию"}
-          isLoader={loader}
-          sorting={Direction.Ascending}
-          disabled={loader}
-          onClick={onClickAscending}
-        />
+          <Button
+            text={"По возрастанию"}
+            isLoader={loader}
+            sorting={Direction.Ascending}
+            disabled={loader}
+            onClick={onClickAscending}
+          />
 
-        <Button
-          text={"По убыванию"}
-          isLoader={loader}
-          disabled={loader}
-          sorting={Direction.Descending}
-          onClick={onClickDescending}
-        />
-</div>
+          <Button
+            text={"По убыванию"}
+            isLoader={loader}
+            disabled={loader}
+            sorting={Direction.Descending}
+            onClick={onClickDescending}
+          />
+        </div>
+
         <Button
           text={"Новый массив"}
           isLoader={loader}
@@ -102,4 +103,5 @@ export const SortingPage: FC = () => {
 
     </SolutionLayout>
   );
-};
+  
+}

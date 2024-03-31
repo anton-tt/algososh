@@ -3,13 +3,15 @@ import { SolutionLayout } from "../ui/solution-layout/solution-layout";
 import { Input } from "../ui/input/input";
 import { Button } from "../ui/button/button";
 import { Circle } from "../ui/circle/circle";
-import { MAX_NUMBER, EMPTY_STRING } from "../../constants/const";
+import { EMPTY_STRING } from "../../constants/delays";
 import { SHORT_DELAY_IN_MS } from "../../constants/delays";
 import { pause } from "../../utils/utils";
 import getFibonacciNumbers from "./utils";
 import styles from "./fibonacci.module.css";
 
 export const FibonacciPage: FC = () => {
+
+  const MAX_NUMBER = 19;
 
   const [inputValue, setInputValue] = useState(EMPTY_STRING);
   const [loader, setLoader] = useState(false);
@@ -46,6 +48,7 @@ export const FibonacciPage: FC = () => {
           type="number" 
           max={ MAX_NUMBER }
           isLimitText={true}
+          value={inputValue}
           onChange={onChange}
         />
         <Button
