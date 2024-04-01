@@ -8,13 +8,10 @@
 
 .box {
   display: flex;
- 
   width: 952px;
-  /*justify-content: space-between;*/
   gap: 12px;
+
 }
-
-
 
 .input {
   width: 204px;
@@ -23,8 +20,7 @@
 
 .line {
   display: flex;
-  padding-top: 120px;
-  gap: 16px;
+  margin: 90px auto 64px;
   justify-content: center;
-  
+
 }

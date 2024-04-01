@@ -3,22 +3,21 @@ import { SolutionLayout } from "../ui/solution-layout/solution-layout";
 import { RadioInput } from "../ui/radio-input/radio-input";
 import { Button } from "../ui/button/button";
 import { Column } from "../ui/column/column";
+import { RADIO_SELECT, RADIO_BUBBLE, ARRAY_MIN_LENGTH, ARRAY_MAX_LENGTH, ARRAY_MIN_NUMBER, ARRAY_MAX_NUMBER } from "../../constants/const";
 import { Direction } from "../../types/direction";
-import { getRandomArray, makeSelectionSort, makeBubbleSort } from "./utils";
-import { TSortingArrayElement } from "./type";
+import { getRandomArray } from "../../utils/utils";
+import { makeSelectionSort, makeBubbleSort } from "./utils";
+import { TNumberArrayElement } from "../../types/structure-element";
 import styles from "./sorting.module.css";
 
 export const SortingPage: FC = () => {
-  
-  const RADIO_SELECT = "Выбор";
-  const RADIO_BUBBLE = "Пузырёк";
-  
+   
   useEffect(() => {
-    setCurrentArray(getRandomArray());
+    setCurrentArray(getRandomArray(ARRAY_MIN_LENGTH, ARRAY_MAX_LENGTH, ARRAY_MIN_NUMBER, ARRAY_MAX_NUMBER));
   }, []);
 
   const [radioValue, setRadioValue] = useState<string>(RADIO_SELECT);
-  const [currentArray, setCurrentArray] = useState<Array<TSortingArrayElement>>([]);
+  const [currentArray, setCurrentArray] = useState<Array<TNumberArrayElement>>([]);
   const [loader, setLoader] = useState(false);  
   
   const onChangeRadio = (event: ChangeEvent<HTMLInputElement>) => {
@@ -26,7 +25,7 @@ export const SortingPage: FC = () => {
   };
 
   const onClickNewArr = () => {
-    setCurrentArray(getRandomArray());
+    setCurrentArray(getRandomArray(ARRAY_MIN_LENGTH, ARRAY_MAX_LENGTH, ARRAY_MIN_NUMBER, ARRAY_MAX_NUMBER));
   };
 
   const onClickAscending = () => {

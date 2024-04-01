@@ -2,36 +2,17 @@ import { ElementStates } from "../../types/element-states";
 import { Direction } from "../../types/direction";
 import { DELAY_IN_MS } from "../../constants/delays";
 import { pause } from "../../utils/utils";
-import { TSortingArrayElement } from "./type";
+import { TNumberArrayElement } from "../../types/structure-element";
 
-const MIN_LENGTH = 3;
-const MAX_LENGTH = 17;
-const MIN_NUMBER = 0;
-const MAX_NUMBER = 100;
-
-const getInteger = (minNumber: number, maxNumber: number) => {
-  return Math.floor(Math.random() * (maxNumber - minNumber + 1)) + minNumber;
-}
-
-export const getRandomArray = (): Array<TSortingArrayElement> => {
-  let array: Array<TSortingArrayElement> = [];
-  const arrayLength = getInteger(MIN_LENGTH, MAX_LENGTH);
-
-  for (let i = 0; i < arrayLength; i++) {
-    array.push({value: getInteger(MIN_NUMBER, MAX_NUMBER), state: ElementStates.Default});
-  }
-  return array;
-}
-
-const swap = (array: Array<TSortingArrayElement>, firstIndex: number, lastIndex: number) => {
+const swap = (array: Array<TNumberArrayElement>, firstIndex: number, lastIndex: number) => {
   const temp = array[firstIndex];
   array[firstIndex] = array[lastIndex];
   array[lastIndex] = temp;
 }
 
-export const makeBubbleSort = async (arr: Array<TSortingArrayElement>,
+export const makeBubbleSort = async (arr: Array<TNumberArrayElement>,
   sortDirection: Direction,
-  setCurrentArray: (currentArray: Array<TSortingArrayElement>) => void) => {
+  setCurrentArray: (currentArray: Array<TNumberArrayElement>) => void) => {
   
   const arrLength = arr.length;
   for (let i = 0; i < arrLength; i++) {
@@ -52,9 +33,9 @@ export const makeBubbleSort = async (arr: Array<TSortingArrayElement>,
 
 }    
 
-export const makeSelectionSort = async (arr: Array<TSortingArrayElement>,
+export const makeSelectionSort = async (arr: Array<TNumberArrayElement>,
   sortDirection: Direction, 
-  setCurrentArray: (currentArray: Array<TSortingArrayElement>) => void) => {
+  setCurrentArray: (currentArray: Array<TNumberArrayElement>) => void) => {
 
   const arrLength = arr.length;
   for (let i = 0; i < arrLength; i++) {
