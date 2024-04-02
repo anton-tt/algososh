@@ -12,8 +12,10 @@ const swap = (array: Array<TNumberArrayElement>, firstIndex: number, lastIndex: 
 
 export const makeBubbleSort = async (arr: Array<TNumberArrayElement>,
   sortDirection: Direction,
-  setCurrentArray: (currentArray: Array<TNumberArrayElement>) => void) => {
+  setCurrentArray: (currentArray: Array<TNumberArrayElement>) => void,
+  setLoader: (sort: Direction) => void) => {
   
+  setLoader(sortDirection);  
   const arrLength = arr.length;
   for (let i = 0; i < arrLength; i++) {
     for (let j = 0; j < (arrLength - i - 1); j++) {
@@ -30,13 +32,15 @@ export const makeBubbleSort = async (arr: Array<TNumberArrayElement>,
     setCurrentArray([...arr]);
     await pause(DELAY_IN_MS);
   }
-
+  setLoader(Direction.Empty);
 }    
 
 export const makeSelectionSort = async (arr: Array<TNumberArrayElement>,
   sortDirection: Direction, 
-  setCurrentArray: (currentArray: Array<TNumberArrayElement>) => void) => {
+  setCurrentArray: (currentArray: Array<TNumberArrayElement>) => void,
+  setLoader: (sort: Direction) => void) => {
 
+  setLoader(sortDirection);   
   const arrLength = arr.length;
   for (let i = 0; i < arrLength; i++) {
     let maxElementIndex = i;
@@ -60,5 +64,5 @@ export const makeSelectionSort = async (arr: Array<TNumberArrayElement>,
     swap(arr, i, maxElementIndex);
     setCurrentArray([...arr]);
   }
-
+  setLoader(Direction.Empty); 
 }

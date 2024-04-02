@@ -6,7 +6,7 @@ export class Node<T> {
     this.value = value;
     this.next = (next === undefined ? null : next);
   }
-}
+};
   
 interface ILinkedList<T> {
   prepend: (element: T) => void;
@@ -19,7 +19,7 @@ interface ILinkedList<T> {
   deleteByIndex: (index: number)  => void;
   toArray: () => Array<T>;
   getSize: () => number;
-}
+};
   
 export default class LinkedList<T> implements ILinkedList<T> {
   private head: Node<T> | null;
@@ -31,7 +31,7 @@ export default class LinkedList<T> implements ILinkedList<T> {
     this.tail = null;
     this.size = 0;
     elements.forEach(element => this.append(element));
-  }
+  };
   
   prepend(element: T) {
     const node = new Node(element, this.head);
@@ -40,11 +40,11 @@ export default class LinkedList<T> implements ILinkedList<T> {
       this.tail = node;
     }
     this.size++;
-  }
+  };
 
   getHeadValue() {
     return this.head?.value;
-  }
+  };
 
   append(element: T) {
     const node = new Node(element);
@@ -56,11 +56,11 @@ export default class LinkedList<T> implements ILinkedList<T> {
     }
     this.tail = node
     this.size++;
-  }
+  };
 
   getTailValue() {
     return this.tail?.value;
-  }
+  };
 
   deleteHead() {
     if (this.head) {
@@ -72,7 +72,7 @@ export default class LinkedList<T> implements ILinkedList<T> {
       }
       this.size--;
     }
-  }
+  };
 
   deleteTail() {
     if (this.tail) {
@@ -92,7 +92,7 @@ export default class LinkedList<T> implements ILinkedList<T> {
       }  
       this.size--;
     }
-  }
+  };
 
   addByIndex(element: T, index: number) {
     if (index < 0 || index > this.getSize()) {
@@ -113,7 +113,7 @@ export default class LinkedList<T> implements ILinkedList<T> {
       newNode.next = node;
     }
     this.size++;
-  }
+  };
 
   deleteByIndex(index: number) {
     if (index < 0 || index > this.getSize()) {
@@ -137,7 +137,7 @@ export default class LinkedList<T> implements ILinkedList<T> {
       node = null;
     }
     this.size--;
-  }
+  };
 
   toArray = () => {
     let arr = [];
@@ -147,10 +147,10 @@ export default class LinkedList<T> implements ILinkedList<T> {
       currentElement = currentElement.next;
     }
     return arr;
-  }
+  };
   
-    getSize() {
-      return this.size;
-    }
+  getSize() {
+    return this.size;
+  };
 
-  }
+}

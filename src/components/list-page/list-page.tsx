@@ -1,21 +1,22 @@
-import { FC, useState, useEffect, useRef, ChangeEvent } from "react";
+import { FC, useState, useRef, ChangeEvent } from "react";
 import { SolutionLayout } from "../ui/solution-layout/solution-layout";
 import { Input } from "../ui/input/input";
 import { Button } from "../ui/button/button";
 import { Circle } from "../ui/circle/circle";
+import {ArrowIcon} from "../ui/icons/arrow-icon";
 import { SHORT_DELAY_IN_MS } from "../../constants/delays";
-import { EMPTY_STRING, ELEMENT_MAX_LENGTH, ARRAY_MIN_LENGTH, ARRAY_MIN_NUMBER, ARRAY_MAX_NUMBER, ADD_ELEMENT, DELETE_ELEMENT, DELETE_ALL } from "../../constants/const";
+import { EMPTY_STRING, ELEMENT_MAX_LENGTH, ARRAY_MIN_LENGTH, ARRAY_MIN_NUMBER, ARRAY_MAX_NUMBER, ADD_TO_HEAD, ADD_TO_TAIL, 
+  DELETE_HEAD, DELETE_TAIL, ADD_BY_INDEX, DELETE_BY_INDEX } from "../../constants/const";
 import { TDataStructureElement } from "../../types/structure-element";
 import { ElementStates } from "../../types/element-states";
 import { getRandomArray, pause } from "../../utils/utils";
 import LinkedList from "./list";
 import {TContainerElement} from "./type";
 import styles from "./list.module.css";
-import { IndexKind } from "typescript";
 
 export const ListPage: FC = () => {
 
-  const ARRAY_MAX_LENGTH = 5;
+  const ARRAY_MAX_LENGTH = 7;
   const initialArray = getRandomArray(ARRAY_MIN_LENGTH, ARRAY_MAX_LENGTH, ARRAY_MIN_NUMBER, ARRAY_MAX_NUMBER)
     .map(element => {return {value: `${element.value}`, state: element.state}});
   const listRef = useRef(new LinkedList<TDataStructureElement>(initialArray));
@@ -36,13 +37,6 @@ export const ListPage: FC = () => {
   };
 
   const [loader, setLoader] = useState<string>(EMPTY_STRING);
-
-  const ADD_TO_HEAD = "Добавить в head";
-  const ADD_TO_TAIL = "Добавить в tail";
-  const DELETE_HEAD = "Удалить из head";
-  const DELETE_TAIL = "Удалить из tail";
-  const ADD_BY_INDEX = "Добавить по индексу";
-  const DELETE_BY_INDEX = "Удалить по индексу";
 
   const onClickAddToHead = async () => {
     setLoader(ADD_TO_HEAD);
@@ -160,7 +154,7 @@ export const ListPage: FC = () => {
     setContainer([...container]);
     await pause(SHORT_DELAY_IN_MS);
 
-    for(let i = 1; i <= index; i++) {
+    for (let i = 1; i <= index; i++) {
       container[i] =  { ...container[i],
                         topCircle: true,
                         optionalCircle: { value: inputValue,
@@ -207,7 +201,7 @@ export const ListPage: FC = () => {
                          optionalCircle: { value: container[index].value,
                                            state: ElementStates.Changing }, 
                          value: EMPTY_STRING                        
-    };
+                        };
     setContainer([...container]);
     await pause(SHORT_DELAY_IN_MS);
      
@@ -310,43 +304,39 @@ export const ListPage: FC = () => {
             disabled={isEmptyIndex || isInvalidIndex || isEmptyList || addToHeadLoader || addToTailLoader || deleteHeadLoader 
               || deleteTailLoader || addByIndexLoader || !isEmptyValue}
           />
-
         </div>
-
       </div>
 
       <div className={styles.line}>
       { container.map((item, index) => {
         return (
-          <div className={styles.circles}>
-            { item.topCircle && 
-              <Circle 
-                //extraClass={styles.topCircle}
-                state={item.optionalCircle?.state}
-                letter={item.optionalCircle?.value}
-                isSmall={true}
-               /> }
+          <div className={styles.circle} key={index}>
 
             <Circle 
-             // extraClass={styles.circle}
+              extraClass={styles.circle}
               state={item?.state}
               letter={`${item.value}`}
-              key={index}
               index={index}
+              head={ item.topCircle ? 
+                <Circle 
+                  state={item.optionalCircle?.state}
+                  letter={item.optionalCircle?.value}
+                  isSmall={true}
+                 /> : (index === 0 ? "head" : EMPTY_STRING) }
+              tail={item.bottomCircle ? 
+                <Circle 
+                  state={item.optionalCircle?.state}
+                  letter={item.optionalCircle?.value}
+                  isSmall={true}
+                /> : (index === list.getSize() - 1 ? "tail" : EMPTY_STRING)}
             />
-
-            { item.bottomCircle && 
-              <Circle 
-                //extraClass={styles.bottom}
-                state={item.optionalCircle?.state}
-                letter={item.optionalCircle?.value}
-                isSmall={true}
-              /> }
+            {(index < list.getSize()) && 
+                <ArrowIcon fill={item.state === ElementStates.Changing ? "#D252E1" : "none"}/>}
           </div>     
         )
       })}
+
       </div>
-    
     </SolutionLayout>
   );
 

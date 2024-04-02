@@ -10,7 +10,10 @@ const swap = (array: Array<TStringArrayElement>, firstIndex: number, lastIndex: 
 }
 
 const reverseArray = async (stringArray: Array<TStringArrayElement>, 
-                            setCurrentArray: (currentArray: Array<TStringArrayElement>) => void) => {
+                            setCurrentArray: (currentArray: Array<TStringArrayElement>) => void,
+                            setLoader: (bool: boolean) => void) => {
+  
+  setLoader(true);
   const stringArrayLength = stringArray.length;
 
   for (let firstIndex = 0; firstIndex < Math.ceil(stringArrayLength / 2); firstIndex++) {
@@ -28,6 +31,7 @@ const reverseArray = async (stringArray: Array<TStringArrayElement>,
     stringArray[lastIndex].state = ElementStates.Modified;
     setCurrentArray([...stringArray]);
   }
+  setLoader(false);
 };
 
 export default reverseArray;

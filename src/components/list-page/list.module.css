@@ -4,6 +4,7 @@
   margin: 0 auto;
   gap: 12px;
   flex-direction: column;
+
 }
 
 .box {
@@ -20,7 +21,15 @@
 
 .line {
   display: flex;
-  margin: 90px auto 64px;
+  padding: 90px 0 64px 0;
   justify-content: center;
+  gap: 16px;
+  
+}
 
+.circle {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  
 }

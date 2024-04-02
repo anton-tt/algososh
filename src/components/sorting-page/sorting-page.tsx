@@ -3,7 +3,8 @@ import { SolutionLayout } from "../ui/solution-layout/solution-layout";
 import { RadioInput } from "../ui/radio-input/radio-input";
 import { Button } from "../ui/button/button";
 import { Column } from "../ui/column/column";
-import { RADIO_SELECT, RADIO_BUBBLE, ARRAY_MIN_LENGTH, ARRAY_MAX_LENGTH, ARRAY_MIN_NUMBER, ARRAY_MAX_NUMBER } from "../../constants/const";
+import { EMPTY_STRING, RADIO_SELECT, RADIO_BUBBLE, ARRAY_MIN_LENGTH, ARRAY_MAX_LENGTH, ARRAY_MIN_NUMBER, 
+  ARRAY_MAX_NUMBER } from "../../constants/const";
 import { Direction } from "../../types/direction";
 import { getRandomArray } from "../../utils/utils";
 import { makeSelectionSort, makeBubbleSort } from "./utils";
@@ -18,7 +19,8 @@ export const SortingPage: FC = () => {
 
   const [radioValue, setRadioValue] = useState<string>(RADIO_SELECT);
   const [currentArray, setCurrentArray] = useState<Array<TNumberArrayElement>>([]);
-  const [loader, setLoader] = useState(false);  
+  const [loader, setLoader] = useState(Direction.Empty);  
+  const [disabler, setDisabler] = useState(EMPTY_STRING);
   
   const onChangeRadio = (event: ChangeEvent<HTMLInputElement>) => {
     setRadioValue(event.target.value);
@@ -29,18 +31,17 @@ export const SortingPage: FC = () => {
   };
 
   const onClickAscending = () => {
-    setLoader(true);
-    (radioValue === RADIO_SELECT) && makeSelectionSort(currentArray, Direction.Ascending, setCurrentArray);
-    (radioValue === RADIO_BUBBLE) && makeBubbleSort(currentArray, Direction.Ascending, setCurrentArray);
-    setLoader(false);
+    (radioValue === RADIO_SELECT) && makeSelectionSort(currentArray, Direction.Ascending, setCurrentArray, setLoader);
+    (radioValue === RADIO_BUBBLE) && makeBubbleSort(currentArray, Direction.Ascending, setCurrentArray, setLoader);
   }
 
   const onClickDescending = () => {
-    setLoader(true);
-    (radioValue === RADIO_SELECT) && makeSelectionSort(currentArray, Direction.Descending, setCurrentArray);
-    (radioValue === RADIO_BUBBLE) && makeBubbleSort(currentArray, Direction.Descending, setCurrentArray);
-    setLoader(false);
+    (radioValue === RADIO_SELECT) && makeSelectionSort(currentArray, Direction.Descending, setCurrentArray, setLoader);
+    (radioValue === RADIO_BUBBLE) && makeBubbleSort(currentArray, Direction.Descending, setCurrentArray, setLoader);
   }
+
+  const loaderAscending = loader === Direction.Ascending;
+  const loaderDescending = loader === Direction.Descending;
   
   return (
     <SolutionLayout title="Сортировка массива">
@@ -65,16 +66,16 @@ export const SortingPage: FC = () => {
         <div className={styles.buttons}>
           <Button
             text={"По возрастанию"}
-            isLoader={loader}
+            isLoader={loaderAscending}
             sorting={Direction.Ascending}
-            disabled={loader}
+            disabled={loaderDescending}
             onClick={onClickAscending}
           />
 
           <Button
             text={"По убыванию"}
-            isLoader={loader}
-            disabled={loader}
+            isLoader={loaderDescending}
+            disabled={loaderAscending}
             sorting={Direction.Descending}
             onClick={onClickDescending}
           />
@@ -82,8 +83,7 @@ export const SortingPage: FC = () => {
 
         <Button
           text={"Новый массив"}
-          isLoader={loader}
-          disabled={loader}
+          disabled={loaderAscending || loaderDescending}
           onClick={onClickNewArr}
         />
        

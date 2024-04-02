@@ -2,7 +2,9 @@ export const EMPTY_STRING = "";
 
 export const ELEMENT_MAX_LENGTH = 4;
 
+export const STRING_MAX_LENGTH = 11;
 export const QUEUE_MAX_SIZE = 7;
+export const FIBONACCI_MAX_NUMBER = 19;
 
 export const ADD_ELEMENT = "Добавить";
 export const DELETE_ELEMENT = "Удалить";
@@ -16,4 +18,9 @@ export const ARRAY_MAX_NUMBER = 100;
 export const RADIO_SELECT = "Выбор";
 export const RADIO_BUBBLE = "Пузырёк";
 
-//RADIO_SELECT, RADIO_BUBBLE, ARRAY_MIN_LENGTH, ARRAY_MAX_LENGTH, ARRAY_MIN_NUMBER, ARRAY_MAX_NUMBER
+export const ADD_TO_HEAD = "Добавить в head";
+export const ADD_TO_TAIL = "Добавить в tail";
+export const DELETE_HEAD = "Удалить из head";
+export const DELETE_TAIL = "Удалить из tail";
+export const ADD_BY_INDEX = "Добавить по индексу";
+export const DELETE_BY_INDEX = "Удалить по индексу";

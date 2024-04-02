@@ -22,9 +22,10 @@
 
 .line {
   display: flex;
-  padding-top: 120px;
+  padding: 90px 0 0;
+  height: 290px;
   gap: 16px;
   justify-content: center;
-  align-items: baseline;
+  align-items: flex-end;
   
 }
