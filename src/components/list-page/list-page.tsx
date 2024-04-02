@@ -11,6 +11,7 @@ import { getRandomArray, pause } from "../../utils/utils";
 import LinkedList from "./list";
 import {TContainerElement} from "./type";
 import styles from "./list.module.css";
+import { IndexKind } from "typescript";
 
 export const ListPage: FC = () => {
 
@@ -38,24 +39,31 @@ export const ListPage: FC = () => {
 
   const ADD_TO_HEAD = "Добавить в head";
   const ADD_TO_TAIL = "Добавить в tail";
+  const DELETE_HEAD = "Удалить из head";
+  const DELETE_TAIL = "Удалить из tail";
+  const ADD_BY_INDEX = "Добавить по индексу";
+  const DELETE_BY_INDEX = "Удалить по индексу";
 
   const onClickAddToHead = async () => {
     setLoader(ADD_TO_HEAD);
     list.prepend({ value: inputValue, state: ElementStates.Default });
-
     const newElementData = list.getHeadValue();
-    container[0] = { ...container[0],
-                     topCircle: true,
-                     optionalCircle: {value: newElementData!.value,
-                                      state: ElementStates.Changing }                         
-                    };
-    setContainer([...container]);
-    await pause(SHORT_DELAY_IN_MS);
 
-    container[0] = { ...container[0],
-                     topCircle: false,
-                     optionalCircle: undefined                         
-                    };
+    if (container.length > 0) {
+      container[0] = { ...container[0],
+                       topCircle: true,
+                       optionalCircle: {value: newElementData!.value,
+                                        state: ElementStates.Changing }                         
+                      };
+      setContainer([...container]);
+      await pause(SHORT_DELAY_IN_MS);
+
+      container[0] = { ...container[0],
+                       topCircle: false
+                                              
+                      };
+    }                  
+ 
     container.unshift({ value: newElementData!.value,
                         state: ElementStates.Modified });                
     setContainer([...container]);
@@ -102,8 +110,129 @@ export const ListPage: FC = () => {
     setLoader(EMPTY_STRING); 
   }
 
+  const onClickDeleteHead = async () => {
+    setLoader(DELETE_HEAD);
+    list.deleteHead();
+
+    container[0] = { ...container[0],
+                     bottomCircle: true,
+                     optionalCircle: {value: container[0].value,
+                                      state: ElementStates.Changing },
+                     value: EMPTY_STRING                        
+                    };
+    setContainer([...container]);
+    await pause(SHORT_DELAY_IN_MS);
+
+    container.shift();                
+    setContainer([...container]);
+    setLoader(EMPTY_STRING); 
+  }
+
+  const onClickDeleteTail = async () => {
+    setLoader(DELETE_TAIL);
+    list.deleteTail();
+
+    const endIndex = container.length - 1;
+    container[endIndex] = { ...container[endIndex],
+                     bottomCircle: true,
+                     optionalCircle: {value: container[endIndex].value,
+                                      state: ElementStates.Changing },
+                     value: EMPTY_STRING                        
+                    };
+    setContainer([...container]);
+    await pause(SHORT_DELAY_IN_MS);
+
+    container.pop();                
+    setContainer([...container]);
+    setLoader(EMPTY_STRING); 
+  }
+
+  const onClickAddByIndex = async () => {
+    setLoader(ADD_BY_INDEX);
+    const index = +inputIndex;
+    list.addByIndex({ value: inputValue, state: ElementStates.Default }, index);
+
+    container[0] = { ...container[0],
+                     topCircle: true,
+                     optionalCircle: { value: inputValue,
+                                       state: ElementStates.Changing }                         
+                    };
+    setContainer([...container]);
+    await pause(SHORT_DELAY_IN_MS);
+
+    for(let i = 1; i <= index; i++) {
+      container[i] =  { ...container[i],
+                        topCircle: true,
+                        optionalCircle: { value: inputValue,
+                                          state: ElementStates.Changing }                         
+                      };
+      container[i - 1] =  { ...container[i - 1],
+                            topCircle: false,
+                            state: ElementStates.Changing 
+                          };                         
+      setContainer([...container]);
+      await pause(SHORT_DELAY_IN_MS);                                
+    };
+    container[index] =  { ...container[index],
+                          topCircle: false,
+                          state: ElementStates.Changing 
+                        };       
+    container.splice(index, 0, { value: inputValue, state: ElementStates.Modified });
+    setContainer([...container]);
+    await pause(SHORT_DELAY_IN_MS);
+  
+    container.map(element => element.state = ElementStates.Default);
+    setContainer([...container]);
+    await pause(SHORT_DELAY_IN_MS);
+
+    setInputValue(EMPTY_STRING);
+    setInputIndex(EMPTY_STRING);
+    setLoader(EMPTY_STRING); 
+  }
+
+  const onClickDeleteByIndex = async () => {
+    setLoader(DELETE_BY_INDEX);
+    const index = +inputIndex;
+    list.deleteByIndex(+inputIndex);
+
+    for(let i = 0; i < index; i++) {
+      container[i] =  { ...container[i],
+                        state: ElementStates.Changing }
+      setContainer([...container]);
+      await pause(SHORT_DELAY_IN_MS);
+    }
+    container[index] = { ...container[index],
+                         state: ElementStates.Changing,
+                         bottomCircle: true,
+                         optionalCircle: { value: container[index].value,
+                                           state: ElementStates.Changing }, 
+                         value: EMPTY_STRING                        
+    };
+    setContainer([...container]);
+    await pause(SHORT_DELAY_IN_MS);
+     
+    container.splice(index, 1);
+    setContainer([...container]);
+    await pause(SHORT_DELAY_IN_MS);
+  
+    container.map(element => element.state = ElementStates.Default);
+    setContainer([...container]);
+    await pause(SHORT_DELAY_IN_MS);
+
+    setInputIndex(EMPTY_STRING);
+    setLoader(EMPTY_STRING); 
+  }
+
+  const isEmptyValue = inputValue.length === 0;
+  const isEmptyIndex = inputIndex.length === 0;
   const addToHeadLoader = loader === ADD_TO_HEAD;
   const addToTailLoader = loader === ADD_TO_TAIL;
+  const deleteHeadLoader = loader === DELETE_HEAD;
+  const deleteTailLoader = loader === DELETE_TAIL;
+  const addByIndexLoader = loader === ADD_BY_INDEX;
+  const deleteByIndexLoader = loader === DELETE_BY_INDEX;
+  const isInvalidIndex = (+inputIndex < 0) || (+inputIndex > list.getSize() - 1);
+  const isEmptyList = list.getSize() === 0;
 
   return (
     <SolutionLayout title="Связный список">
@@ -123,6 +252,8 @@ export const ListPage: FC = () => {
             linkedList="small"
             isLoader={addToHeadLoader}
             onClick={onClickAddToHead}
+            disabled={isEmptyValue || addToTailLoader || deleteHeadLoader || deleteTailLoader || addByIndexLoader 
+              || deleteByIndexLoader || !isEmptyIndex}
           />
 
           <Button
@@ -130,20 +261,26 @@ export const ListPage: FC = () => {
             linkedList="small"
             isLoader={addToTailLoader}
             onClick={onClickAddToTail}
+            disabled={isEmptyValue || addToHeadLoader || deleteHeadLoader || deleteTailLoader || addByIndexLoader 
+              || deleteByIndexLoader || !isEmptyIndex}
           />
 
           <Button
-            text={"Удалить из head"}
+            text={DELETE_HEAD}
             linkedList="small"
-            //isLoader={addElementLoader}
-            //onClick={onClickAdd}
+            isLoader={deleteHeadLoader}
+            onClick={onClickDeleteHead}
+            disabled={!isEmptyValue || isEmptyList || addToHeadLoader || addToTailLoader || deleteTailLoader || addByIndexLoader 
+            || deleteByIndexLoader || !isEmptyIndex}
           />
 
           <Button
-            text={"Удалить из tail"}
+            text={DELETE_TAIL}
             linkedList="small"
-            //isLoader={addElementLoader}
-            //onClick={onClickAdd}
+            isLoader={deleteTailLoader}
+            onClick={onClickDeleteTail}
+            disabled={!isEmptyValue || isEmptyList || addToHeadLoader || addToTailLoader || deleteHeadLoader || addByIndexLoader 
+              || deleteByIndexLoader || !isEmptyIndex}
           />
         </div>
 
@@ -151,24 +288,27 @@ export const ListPage: FC = () => {
           <Input
             extraClass={styles.input}
             placeholder="Введите индекс"
-            /*maxLength={MAX_STRING_LENGTH}
-            isLimitText={true}*/
+            type="number"
             value={inputIndex}
             onChange={onChangeIndex}
           />
 
           <Button
-            text={"Добавить по индексу"}
+            text={ADD_BY_INDEX}
             linkedList="big"
-            //isLoader={addElementLoader}
-            //onClick={onClickAdd}
+            isLoader={addByIndexLoader}
+            onClick={onClickAddByIndex}
+            disabled={isEmptyIndex || isInvalidIndex || addToHeadLoader || addToTailLoader || deleteHeadLoader || deleteTailLoader 
+              || deleteByIndexLoader || isEmptyValue}
           />
 
           <Button
-            text={"Удалить по индексу"}
+            text={DELETE_BY_INDEX}
             linkedList="big"
-            //isLoader={addElementLoader}
-            //onClick={onClickAdd}
+            isLoader={deleteByIndexLoader}
+            onClick={onClickDeleteByIndex}
+            disabled={isEmptyIndex || isInvalidIndex || isEmptyList || addToHeadLoader || addToTailLoader || deleteHeadLoader 
+              || deleteTailLoader || addByIndexLoader || !isEmptyValue}
           />
 
         </div>
