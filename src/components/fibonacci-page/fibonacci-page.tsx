@@ -68,5 +68,4 @@ export const FibonacciPage: FC = () => {
       </div>
     </SolutionLayout>
   );
-
 };
