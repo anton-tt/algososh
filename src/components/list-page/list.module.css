@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+  width: 952px;
+  margin: 0 auto;
+  gap: 12px;
+  flex-direction: column;
+
+}
+
+.box {
+  display: flex;
+  width: 952px;
+  gap: 12px;
+
+}
+
+.input {
+  width: 204px;
+  
+}
+
+.line {
+  display: flex;
+  padding: 90px 0 64px 0;
+  justify-content: center;
+  gap: 16px;
+  
+}
+
+.circle {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  
+}

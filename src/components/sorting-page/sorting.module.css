@@ -1,0 +1,31 @@
+.box {
+  display: flex;
+  width: 980px;
+  margin: 0 auto;
+  align-items: baseline;
+
+}
+
+.radio {
+  display: flex;
+  padding-right: 52px;
+  gap: 40px;
+
+}
+
+.buttons {
+  display: flex;
+  padding-right: 80px;
+  gap: 12px;
+
+}
+
+.line {
+  display: flex;
+  padding: 90px 0 0;
+  height: 290px;
+  gap: 16px;
+  justify-content: center;
+  align-items: flex-end;
+  
+}

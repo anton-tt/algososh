@@ -1,0 +1,17 @@
+.box {
+  display: flex;
+  width: 522px;
+  gap: 12px;
+  margin: 0 auto;
+
+}
+
+.line {
+  display: flex;
+  padding-top: 120px;
+  column-gap: 16px;
+  row-gap: 60px;
+  justify-content: center;
+  flex-wrap: wrap;
+
+}
