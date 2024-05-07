@@ -3,7 +3,7 @@ import { SolutionLayout } from "../ui/solution-layout/solution-layout";
 import { Input } from "../ui/input/input";
 import { Button } from "../ui/button/button";
 import { Circle } from "../ui/circle/circle";
-import { EMPTY_STRING, FIBONACCI_MAX_NUMBER } from "../../constants/const";
+import { EMPTY_STRING, FIBONACCI_MAX_NUMBER, FIBONACCI_INPUT, FIBONACCI_BUTTON } from "../../constants/const";
 import { SHORT_DELAY_IN_MS } from "../../constants/delays";
 import { pause } from "../../utils/utils";
 import getFibonacciNumbers from "./utils";
@@ -47,12 +47,14 @@ export const FibonacciPage: FC = () => {
           isLimitText={true}
           value={inputValue}
           onChange={onChange}
+          data-test={FIBONACCI_INPUT}
         />
         <Button
           text={"Рассчитать"}
           isLoader={loader}
           disabled={isInvalidNumber}
           onClick={onClick} 
+          data-test={FIBONACCI_BUTTON}
         />
       </div>
 
@@ -68,4 +70,5 @@ export const FibonacciPage: FC = () => {
       </div>
     </SolutionLayout>
   );
+  
 };

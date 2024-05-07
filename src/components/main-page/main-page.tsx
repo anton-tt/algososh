@@ -1,6 +1,7 @@
 import React from "react";
 import Marquee from "react-fast-marquee";
 import { Link } from "react-router-dom";
+import { STRING_PAGE, RECURSION, FIBONACCI_PAGE, FIBONACCI, STACK_PAGE, STACK } from "../../constants/const";
 import styles from "./main-page.module.css";
 
 interface MainPageProps {
@@ -21,16 +22,16 @@ export const MainPage: React.FC<MainPageProps> = ({ extraClass = "" }) => {
         </p>
       </div>
       <div className={styles.cards_box}>
-        <Link className={styles.link} to="/recursion">
+        <Link className={styles.link} to={STRING_PAGE} data-test={RECURSION}>
           <div className={`${styles.card} ${styles.string}`} />
         </Link>
-        <Link className={styles.link} to="/fibonacci">
+        <Link className={styles.link} to={FIBONACCI_PAGE} data-test={FIBONACCI}>
           <div className={`${styles.card} ${styles.fibonacci}`} />
         </Link>
         <Link className={styles.link} to="/sorting">
           <div className={`${styles.card} ${styles.arr}`} />
         </Link>
-        <Link className={styles.link} to="/stack">
+        <Link className={styles.link} to={STACK_PAGE} data-test={STACK}>
           <div className={`${styles.card} ${styles.stack}`} />
         </Link>
         <Link className={styles.link} to="/queue">

@@ -4,7 +4,7 @@ import { Input } from "../ui/input/input";
 import { Button } from "../ui/button/button";
 import { Circle } from "../ui/circle/circle";
 import { SHORT_DELAY_IN_MS } from "../../constants/delays";
-import { EMPTY_STRING, ELEMENT_MAX_LENGTH, ADD_ELEMENT, DELETE_ELEMENT, DELETE_ALL } from "../../constants/const";
+import { EMPTY_STRING, ELEMENT_MAX_LENGTH, ADD_ELEMENT, DELETE_ELEMENT, DELETE_ALL, STACK_INPUT } from "../../constants/const";
 import { ElementStates } from "../../types/element-states";
 import { TDataStructureElement } from "../../types/structure-element";
 import { pause } from "../../utils/utils";
@@ -68,6 +68,7 @@ export const StackPage: FC = () => {
             isLimitText={true}
             value={inputValue}
             onChange={onChange}
+            data-test={STACK_INPUT}
           />
 
           <Button
@@ -75,6 +76,7 @@ export const StackPage: FC = () => {
             isLoader={addElementLoader}
             disabled={isEmptyString || deleteElementLoader || deleteAllLoader}
             onClick={onClickAdd}
+            data-test={ADD_ELEMENT}
           />
 
           <Button
@@ -82,6 +84,7 @@ export const StackPage: FC = () => {
             isLoader={deleteElementLoader}
             disabled={!isEmptyString || isEmptyStack || addElementLoader || deleteAllLoader}
             onClick={onClickDelete}
+            data-test={DELETE_ELEMENT}
           />
         </div>
 
@@ -90,6 +93,7 @@ export const StackPage: FC = () => {
           isLoader={deleteAllLoader}
           disabled={!isEmptyString || isEmptyStack || addElementLoader || deleteElementLoader}
           onClick={onClickClear}
+          data-test={DELETE_ALL}
         />
       </div>
 
