@@ -60,7 +60,7 @@ describe("Проверка вариантов разворота строки", 
     expect(setCurrentArray).toHaveBeenCalledWith(array);
   });
 
-  it("строка пустая", async () => {
+  it("строка пустая", async () => { 
     const array = [
         {value: "",
         state: ElementStates.Default}      
