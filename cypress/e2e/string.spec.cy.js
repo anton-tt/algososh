@@ -1,4 +1,4 @@
-import { BASE_URL, SLASH, RECURSION, RECURSION_INPUT, RECURSION_BUTTON, CIRCLE_BASIC, DEFAULT_COLOR, 
+import { BASE_URL, SLASH, RECURSION, BASIC_INPUT, BASIC_BUTTON, BASIC_CIRCLE, DEFAULT_COLOR, 
   CHANGING_COLOR, MODIFIED_COLOR } from "../../src/constants/const";
 
 describe("Проверка компонента Строка", function() {
@@ -7,8 +7,8 @@ describe("Проверка компонента Строка", function() {
     cy.visit(`${BASE_URL}${SLASH}`);
     cy.get(`[data-test=${RECURSION}]`).click();
     cy.contains("Строка");
-    cy.get(`[data-test=${RECURSION_INPUT}]`).as("input");
-    cy.get(`[data-test=${RECURSION_BUTTON}]`).as("button");
+    cy.get(`[data-test=${BASIC_INPUT}]`).as("input");
+    cy.get(`[data-test=${BASIC_BUTTON}]`).as("button");
   });
  
   it("при пустом инпуте кнопка добавления недоступна", () => {
@@ -23,10 +23,10 @@ describe("Проверка компонента Строка", function() {
     cy.get("@button").click().should("be.disabled");
     cy.get("@input").should("be.empty");
 
-    cy.get(CIRCLE_BASIC).eq(0).as("firstElement");
-    cy.get(CIRCLE_BASIC).eq(1).as("secondElement");
-    cy.get(CIRCLE_BASIC).eq(2).as("thirdElement");
-    cy.get(CIRCLE_BASIC).eq(3).as("fourthElement");
+    cy.get(BASIC_CIRCLE).eq(0).as("firstElement");
+    cy.get(BASIC_CIRCLE).eq(1).as("secondElement");
+    cy.get(BASIC_CIRCLE).eq(2).as("thirdElement");
+    cy.get(BASIC_CIRCLE).eq(3).as("fourthElement");
 
     cy.get("@firstElement").should("have.css", "border-color", CHANGING_COLOR).contains("к");
     cy.get("@secondElement").should("have.css", "border-color", DEFAULT_COLOR).contains("л");

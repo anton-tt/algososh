@@ -4,7 +4,8 @@ import { Input } from "../ui/input/input";
 import { Button } from "../ui/button/button";
 import { Circle } from "../ui/circle/circle";
 import { SHORT_DELAY_IN_MS } from "../../constants/delays";
-import { EMPTY_STRING, ELEMENT_MAX_LENGTH, QUEUE_MAX_SIZE, ADD_ELEMENT, DELETE_ELEMENT, DELETE_ALL } from "../../constants/const";
+import { EMPTY_STRING, ELEMENT_MAX_LENGTH, QUEUE_MAX_SIZE, ADD_ELEMENT, DELETE_ELEMENT, DELETE_ALL, 
+  BASIC_INPUT } from "../../constants/const";
 import { ElementStates } from "../../types/element-states";
 import { TDataStructureElement } from "../../types/structure-element";
 import { pause } from "../../utils/utils";
@@ -69,6 +70,7 @@ export const QueuePage: FC = () => {
             isLimitText={true}
             value={inputValue}
             onChange={onChange}
+            data-test={BASIC_INPUT}
           />
 
           <Button
@@ -76,6 +78,7 @@ export const QueuePage: FC = () => {
             isLoader={addElementLoader}
             disabled={isEmptyString || isOverflowing || deleteElementLoader || deleteAllLoader}
             onClick={onClickAdd}
+            data-test={ADD_ELEMENT}
           />
 
           <Button
@@ -83,6 +86,7 @@ export const QueuePage: FC = () => {
             isLoader={deleteElementLoader}
             disabled={!isEmptyString || isEmptyQueue || addElementLoader || deleteAllLoader}
             onClick={onClickDelete}
+            data-test={DELETE_ELEMENT}
           />
         </div>
 
@@ -91,6 +95,7 @@ export const QueuePage: FC = () => {
           isLoader={deleteAllLoader}
           disabled={!isEmptyString || isEmptyQueue || addElementLoader || deleteElementLoader}
           onClick={onClickClear}
+          data-test={DELETE_ALL}
         />
       </div>
 

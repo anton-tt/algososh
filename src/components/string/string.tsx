@@ -4,7 +4,7 @@ import { Input } from "../ui/input/input";
 import { Button } from "../ui/button/button";
 import { Circle } from "../ui/circle/circle";
 import { ElementStates } from "../../types/element-states";
-import { EMPTY_STRING, STRING_MAX_LENGTH, RECURSION_INPUT, RECURSION_BUTTON } from "../../constants/const";
+import { EMPTY_STRING, STRING_MAX_LENGTH, BASIC_INPUT, BASIC_BUTTON } from "../../constants/const";
 import { TStringArrayElement } from "./type";
 import reverseArray from "./utils";
 import styles from "./string.module.css";
@@ -43,7 +43,7 @@ export const StringComponent: FC = () => {
           isLimitText={true}
           value={inputValue}
           onChange={onChange}
-          data-test={RECURSION_INPUT}
+          data-test={BASIC_INPUT}
         />
 
         <Button
@@ -51,7 +51,7 @@ export const StringComponent: FC = () => {
           isLoader={loader}
           disabled={isEmptyString}
           onClick={onClick}
-          data-test={RECURSION_BUTTON} 
+          data-test={BASIC_BUTTON} 
         />
       </div>
 

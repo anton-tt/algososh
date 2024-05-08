@@ -4,7 +4,7 @@ import { Input } from "../ui/input/input";
 import { Button } from "../ui/button/button";
 import { Circle } from "../ui/circle/circle";
 import { SHORT_DELAY_IN_MS } from "../../constants/delays";
-import { EMPTY_STRING, ELEMENT_MAX_LENGTH, ADD_ELEMENT, DELETE_ELEMENT, DELETE_ALL, STACK_INPUT } from "../../constants/const";
+import { EMPTY_STRING, ELEMENT_MAX_LENGTH, ADD_ELEMENT, DELETE_ELEMENT, DELETE_ALL, BASIC_INPUT } from "../../constants/const";
 import { ElementStates } from "../../types/element-states";
 import { TDataStructureElement } from "../../types/structure-element";
 import { pause } from "../../utils/utils";
@@ -68,7 +68,7 @@ export const StackPage: FC = () => {
             isLimitText={true}
             value={inputValue}
             onChange={onChange}
-            data-test={STACK_INPUT}
+            data-test={BASIC_INPUT}
           />
 
           <Button

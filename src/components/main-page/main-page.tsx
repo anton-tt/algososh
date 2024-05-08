@@ -1,7 +1,8 @@
 import React from "react";
 import Marquee from "react-fast-marquee";
 import { Link } from "react-router-dom";
-import { STRING_PAGE, RECURSION, FIBONACCI_PAGE, FIBONACCI, STACK_PAGE, STACK } from "../../constants/const";
+import { STRING_PAGE, RECURSION, FIBONACCI_PAGE, FIBONACCI, STACK_PAGE, STACK, QUEUE_PAGE, QUEUE, 
+  LIST_PAGE, LIST } from "../../constants/const";
 import styles from "./main-page.module.css";
 
 interface MainPageProps {
@@ -34,10 +35,10 @@ export const MainPage: React.FC<MainPageProps> = ({ extraClass = "" }) => {
         <Link className={styles.link} to={STACK_PAGE} data-test={STACK}>
           <div className={`${styles.card} ${styles.stack}`} />
         </Link>
-        <Link className={styles.link} to="/queue">
+        <Link className={styles.link} to={QUEUE_PAGE} data-test={QUEUE}>
           <div className={`${styles.card} ${styles.queue}`} />
         </Link>
-        <Link className={styles.link} to="/list">
+        <Link className={styles.link} to={LIST_PAGE}  data-test={LIST}>
           <div className={`${styles.card} ${styles.list}`} />
         </Link>
       </div>
