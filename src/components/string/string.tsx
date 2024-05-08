@@ -9,9 +9,6 @@ import { TStringArrayElement } from "./type";
 import reverseArray from "./utils";
 import styles from "./string.module.css";
 
-import { DELAY_IN_MS } from "../../constants/delays";
-import { pause } from "../../utils/utils";
-
 export const StringComponent: FC = () => {
 
   const [inputValue, setInputValue] = useState(EMPTY_STRING);
