@@ -25,9 +25,9 @@ describe("Проверка вариантов разворота строки", 
       state: ElementStates.Modified},
       {value: "п",
       state: ElementStates.Modified},       
-      ];
-      await reverseArray(array, setCurrentArray, setLoader);
-      expect(setCurrentArray).toHaveBeenCalledWith(newArray);
+    ];
+    await reverseArray(array, setCurrentArray, setLoader);
+    expect(setCurrentArray).toHaveBeenCalledWith(newArray);
   });
 
   it("строка с нечётным количеством элементов", async () => {
@@ -38,36 +38,35 @@ describe("Проверка вариантов разворота строки", 
         state: ElementStates.Default},
         {value: "т",
         state: ElementStates.Default}       
-      ];
-      const newArray = [
-        {value: "т",
-        state: ElementStates.Modified}, 
-        {value: "о",
-        state: ElementStates.Modified},
-        {value: "к",
-        state: ElementStates.Modified}      
-        ];
-        await reverseArray(array, setCurrentArray, setLoader);
-        expect(setCurrentArray).toHaveBeenCalledWith(newArray);
+    ];
+    const newArray = [
+      {value: "т",
+      state: ElementStates.Modified}, 
+      {value: "о",
+      state: ElementStates.Modified},
+      {value: "к",
+      state: ElementStates.Modified}      
+    ];
+    await reverseArray(array, setCurrentArray, setLoader);
+    expect(setCurrentArray).toHaveBeenCalledWith(newArray);
   });
 
   it("строка с одним элементом", async () => {
     const array = [
         {value: "а",
         state: ElementStates.Default}      
-      ];
-        await reverseArray(array, setCurrentArray, setLoader);
-        expect(setCurrentArray).toHaveBeenCalledWith(array);
+    ];
+    await reverseArray(array, setCurrentArray, setLoader);
+    expect(setCurrentArray).toHaveBeenCalledWith(array);
   });
 
   it("строка пустая", async () => {
     const array = [
         {value: "",
         state: ElementStates.Default}      
-      ];
-        await reverseArray(array, setCurrentArray, setLoader);
-        expect(setCurrentArray).toHaveBeenCalledWith(array);
+    ];
+      await reverseArray(array, setCurrentArray, setLoader);
+      expect(setCurrentArray).toHaveBeenCalledWith(array);
   });
-
 
 });
