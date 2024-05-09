@@ -1,36 +1,28 @@
-import React from 'react';
-import renderer from "react-test-renderer";
 import {render, screen, fireEvent} from "@testing-library/react";
 import { Button } from "./button";
 
 describe("Проверка компонента Кнопка", function() {
   
   it("кнопка без текста", () => {
-    const tree = renderer
-    .create(<Button text="" />)
-    .toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-  
-  it("кнопка с текстом", () => {
-    const tree = renderer
-    .create(<Button text="Добавить" />)
-    .toJSON();
-    expect(tree).toMatchSnapshot();
+    const { container } = render(<Button text="" />);
+    expect(container).toMatchSnapshot();
   });
 
+  it("кнопка с текстом", () => {
+    const { container } = render(<Button text="Добавить" />);
+    expect(screen.getByText("Добавить")).toBeInTheDocument();
+    expect(container).toMatchSnapshot();
+  }); 
+
   it("кнопка заблокирована", () => {
-    const tree = renderer
-    .create(<Button text="Добавить" disabled={true} />)
-    .toJSON();
-    expect(tree).toMatchSnapshot();
+    const { container } = render(<Button text="Добавить" disabled={true} />);
+    expect(container).toMatchSnapshot();
   });
    
   it("кнопка при загрузке", () => {
-    const tree = renderer
-    .create(<Button text="Добавить" isLoader={true} />)
-    .toJSON();
-    expect(tree).toMatchSnapshot();
+    const { container } = render(<Button isLoader={true} />);
+    expect(screen.getByAltText("Загрузка.")).toBeInTheDocument();
+    expect(container).toMatchSnapshot();
   });
 
   it("клик по кнопке", () => {
