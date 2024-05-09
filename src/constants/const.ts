@@ -38,6 +38,9 @@ export const STRING_PAGE = SLASH + RECURSION;
 export const FIBONACCI = "fibonacci";
 export const FIBONACCI_PAGE = SLASH + FIBONACCI;
 
+export const SORTING = "sorting";
+export const SORTING_PAGE = SLASH + SORTING;
+
 export const STACK = "stack";
 export const STACK_PAGE = SLASH + STACK;
 

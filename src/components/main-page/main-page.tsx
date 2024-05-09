@@ -1,7 +1,7 @@
 import React from "react";
 import Marquee from "react-fast-marquee";
 import { Link } from "react-router-dom";
-import { STRING_PAGE, RECURSION, FIBONACCI_PAGE, FIBONACCI, STACK_PAGE, STACK, QUEUE_PAGE, QUEUE, 
+import { STRING_PAGE, RECURSION, FIBONACCI_PAGE, FIBONACCI, SORTING_PAGE, SORTING, STACK_PAGE, STACK, QUEUE_PAGE, QUEUE, 
   LIST_PAGE, LIST } from "../../constants/const";
 import styles from "./main-page.module.css";
 
@@ -29,7 +29,7 @@ export const MainPage: React.FC<MainPageProps> = ({ extraClass = "" }) => {
         <Link className={styles.link} to={FIBONACCI_PAGE} data-test={FIBONACCI}>
           <div className={`${styles.card} ${styles.fibonacci}`} />
         </Link>
-        <Link className={styles.link} to="/sorting">
+        <Link className={styles.link} to={SORTING_PAGE}  data-test={SORTING}>
           <div className={`${styles.card} ${styles.arr}`} />
         </Link>
         <Link className={styles.link} to={STACK_PAGE} data-test={STACK}>

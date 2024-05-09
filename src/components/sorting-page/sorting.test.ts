@@ -3,7 +3,7 @@ import { Direction } from "../../types/direction";
 import { TNumberArrayElement } from "../../types/structure-element";
 import { makeSelectionSort, makeBubbleSort } from "./utils";
 
-jest.setTimeout(10000);
+jest.setTimeout(50000);
 
 const setCurrentArray = jest.fn(); 
 const setLoader = jest.fn();
@@ -14,6 +14,8 @@ const array = [
   {value: 1,
   state: ElementStates.Default},
   {value: 22,
+  state: ElementStates.Default},
+  {value: -101,
   state: ElementStates.Default}       
 ];
 const arrayOneElement = [
@@ -23,6 +25,8 @@ const arrayOneElement = [
 const emptyArray: Array<TNumberArrayElement> = [];
 
 const newArrayAsk = [
+  {value: -101,
+  state: ElementStates.Modified},
   {value: 1,
   state: ElementStates.Modified}, 
   {value: 22,
@@ -36,6 +40,8 @@ const newArrayDesk = [
   {value: 22,
   state: ElementStates.Modified},
   {value: 1,
+  state: ElementStates.Modified},
+  {value: -101,
   state: ElementStates.Modified}       
 ];
 const newArrayOneElement = [
