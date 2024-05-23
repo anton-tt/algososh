@@ -5,8 +5,9 @@ import { Button } from "../ui/button/button";
 import { Circle } from "../ui/circle/circle";
 import {ArrowIcon} from "../ui/icons/arrow-icon";
 import { SHORT_DELAY_IN_MS } from "../../constants/delays";
-import { EMPTY_STRING, ELEMENT_MAX_LENGTH, ARRAY_MIN_LENGTH, ARRAY_MIN_NUMBER, ARRAY_MAX_NUMBER, ADD_TO_HEAD, ADD_TO_TAIL, 
-  DELETE_HEAD, DELETE_TAIL, ADD_BY_INDEX, DELETE_BY_INDEX } from "../../constants/const";
+import { EMPTY_STRING, ELEMENT_MAX_LENGTH, ARRAY_MIN_LENGTH, ARRAY_MIN_NUMBER, ARRAY_MAX_NUMBER, ADD_TO_HEAD, ADD_HEAD, 
+  ADD_TO_TAIL, ADD_TAIL, DELETE_HEAD, DEL_HEAD, DELETE_TAIL, DEL_TAIL, ADD_BY_INDEX, ADD_INDEX, DELETE_BY_INDEX, DEL_INDEX, 
+  BASIC_INPUT, ADDITIONAL_INPUT } from "../../constants/const";
 import { TDataStructureElement } from "../../types/structure-element";
 import { ElementStates } from "../../types/element-states";
 import { getRandomArray, pause } from "../../utils/utils";
@@ -240,6 +241,7 @@ export const ListPage: FC = () => {
             isLimitText={true}
             value={inputValue}
             onChange={onChangeValue}
+            data-test={BASIC_INPUT}
           />
           <Button
             text={ADD_TO_HEAD}
@@ -248,6 +250,7 @@ export const ListPage: FC = () => {
             onClick={onClickAddToHead}
             disabled={isEmptyValue || addToTailLoader || deleteHeadLoader || deleteTailLoader || addByIndexLoader 
               || deleteByIndexLoader || !isEmptyIndex}
+            data-test={ADD_HEAD}  
           />
 
           <Button
@@ -257,6 +260,7 @@ export const ListPage: FC = () => {
             onClick={onClickAddToTail}
             disabled={isEmptyValue || addToHeadLoader || deleteHeadLoader || deleteTailLoader || addByIndexLoader 
               || deleteByIndexLoader || !isEmptyIndex}
+            data-test={ADD_TAIL}  
           />
 
           <Button
@@ -265,7 +269,8 @@ export const ListPage: FC = () => {
             isLoader={deleteHeadLoader}
             onClick={onClickDeleteHead}
             disabled={!isEmptyValue || isEmptyList || addToHeadLoader || addToTailLoader || deleteTailLoader || addByIndexLoader 
-            || deleteByIndexLoader || !isEmptyIndex}
+              || deleteByIndexLoader || !isEmptyIndex}
+            data-test={DEL_HEAD}
           />
 
           <Button
@@ -275,6 +280,7 @@ export const ListPage: FC = () => {
             onClick={onClickDeleteTail}
             disabled={!isEmptyValue || isEmptyList || addToHeadLoader || addToTailLoader || deleteHeadLoader || addByIndexLoader 
               || deleteByIndexLoader || !isEmptyIndex}
+            data-test={DEL_TAIL}
           />
         </div>
 
@@ -285,6 +291,7 @@ export const ListPage: FC = () => {
             type="number"
             value={inputIndex}
             onChange={onChangeIndex}
+            data-test={ADDITIONAL_INPUT}
           />
 
           <Button
@@ -294,6 +301,7 @@ export const ListPage: FC = () => {
             onClick={onClickAddByIndex}
             disabled={isEmptyIndex || isInvalidIndex || addToHeadLoader || addToTailLoader || deleteHeadLoader || deleteTailLoader 
               || deleteByIndexLoader || isEmptyValue}
+            data-test={ADD_INDEX}  
           />
 
           <Button
@@ -303,6 +311,7 @@ export const ListPage: FC = () => {
             onClick={onClickDeleteByIndex}
             disabled={isEmptyIndex || isInvalidIndex || isEmptyList || addToHeadLoader || addToTailLoader || deleteHeadLoader 
               || deleteTailLoader || addByIndexLoader || !isEmptyValue}
+            data-test={DEL_INDEX}  
           />
         </div>
       </div>
